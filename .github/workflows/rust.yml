@@ -20,8 +20,9 @@ jobs:
             archive: zip
     steps:
       - uses: actions/checkout@master
-      - name: Compile and release
-        uses: rust-build/rust-build.action@v1.4.4
+      - name: Create a Release in a GitHub Action
+        uses: comnoco/create-release-action@v2.0.5
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

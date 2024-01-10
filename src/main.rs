@@ -17,8 +17,8 @@ struct ComfyData {
     comfypath: String,
     params: String,
 }
-fn listdir() -> Result<Vec<String>, &'static str> {
-    let dir = fs::read_dir("C:\\ComfyPSD-backend\\custom_nodes");
+fn listdir(data: &ComfyData) -> Result<Vec<String>, &'static str> {
+    let dir = fs::read_dir(format!("{}custom_nodes", data.comfypath));
     let mut result = Vec::new();
     match dir {
         Ok(dirs) => {
@@ -284,7 +284,7 @@ fn main() {
                 "delete input/output",
                 "quit",
             ];
-            let mut items = listdir().unwrap();
+            let mut items = listdir(&data).unwrap();
             items.push("quit".into());
             main_menu(&menu, items, data);
         }
